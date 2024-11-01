@@ -63,7 +63,7 @@
     }
   </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 flex flex-col items-center min-h-screen p-6">
   <!-- Poster Content -->
   <div
     id="poster"
@@ -188,7 +188,7 @@
     </button>
   </div>
   <!-- Posters Container -->
-  <div id="generatedPosters" class="flex flex-wrap gap-8 justify-center"></div>
+  <div id="generatedPosters" class="flex flex-col gap-8 items-center justify-start w-full"></div>
 
   <!-- Scripts -->
   <!-- html2canvas -->
@@ -275,7 +275,7 @@
             numberHighlight.classList.remove("text-yellow-800");
           }
 
-          // Append the cloned poster to the container
+          // Append the cloned poster to the container (vertically below each other)
           generatedPostersContainer.appendChild(newPoster);
         }
       });
