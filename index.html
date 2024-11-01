@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modern Poster</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Font Awesome -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    /* Blue rounded border for the poster */
+    #poster {
+      border: 2px solid #3B82F6;
+      border-radius: 1rem;
+      background-color: #ffffff;
+    }
+
+    .lucide {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke-width: 1.5;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+
+    .category-dropdown-container {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2);
+    }
+
+    .category-dropdown {
+      outline: none;
+      border: none;
+      background: transparent;
+      font-weight: bold;
+      font-size: 1rem;
+      appearance: none; /* Remove default dropdown arrow */
+      -moz-appearance: none; /* Firefox */
+      -webkit-appearance: none; /* Safari and Chrome */
+      padding-right: 1.5rem; /* To give a bit of space for text without the arrow */
+    }
+
+    .category-dropdown-container i {
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <!-- Poster Content -->
+  <div
+    id="poster"
+    class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full mb-8"
+  >
+    <!-- Header with Dropdown -->
+    <div class="flex justify-between items-center mb-6">
+      <!-- Category Dropdown Container -->
+      <div id="categoryContainer" class="category-dropdown-container text-yellow-800">
+        <i id="categoryIcon" data-lucide="crown" class="lucide"></i>
+        <select id="categorySelect" class="category-dropdown text-yellow-800" onchange="updateCategoryStyles()">
+          <option value="Gold" data-bg-color="#fef3c7" data-text-color="#f59e0b" data-icon="crown" data-text-class="text-yellow-800">Gold</option>
+          <option value="Silver" data-bg-color="#e5e7eb" data-text-color="#6b7280" data-icon="award" data-text-class="text-gray-500">Silver</option>
+          <option value="Silver Plus" data-bg-color="#d1d5db" data-text-color="#4b5563" data-icon="star" data-text-class="text-gray-600">Silver Plus</option>
+          <option value="Platinum" data-bg-color="#dbeafe" data-text-color="#1e40af" data-icon="gem" data-text-class="text-blue-800">Platinum</option>
+        </select>
+      </div>
+
+      <!-- Logo Image -->
+      <img 
+        src="file:///Users/tayasarbhat/Desktop/tab.png" 
+        alt="Local Logo" 
+        style="height: 45px; width: 130px; display: block;">
+    </div>
+    <!-- Phone Number -->
+    <div id="numberContainer" class="text-center mb-6">
+      <div
+        id="numberHighlight"
+        class="text-4xl font-bold py-3 px-6 rounded-2xl inline-block flex items-center justify-center"
+        contenteditable="true"
+        style="background-color: #fef3c7; color: #f59e0b;"
+      >
+        <i data-lucide="phone" class="lucide mr-2"></i> <!-- This is the original phone icon that will not change -->
+        050786787
+      </div>
+    </div>
+    <!-- Plan Name -->
+    <div class="text-center mb-6">
+      <div id="planName" class="text-gray-800 text-xl font-bold border-2 border-yellow-500 rounded-lg inline-block p-2" contenteditable="true">
+        Freedom Data Plan 500 Flexi
+      </div>
+    </div>
+    <!-- Plan Details -->
+    <div id="planDetails" class="grid grid-cols-2 gap-4 mb-6">
+      <!-- Local Data -->
+      <div class="bg-blue-50 p-4 rounded-xl text-center shadow-sm border-2 border-red-300">
+        <div class="flex items-center text-gray-600 text-sm mb-1" contenteditable="true">
+          <i data-lucide="wifi" class="lucide mr-2"></i>Local Data
+        </div>
+        <div class="text-green-600 text-lg font-bold" contenteditable="true">
+          Unlimited
+        </div>
+      </div>
+      <!-- Speed -->
+      <div class="bg-blue-50 p-4 rounded-xl text-center shadow-sm border-2 border-yellow-500">
+        <div class="text-gray-500 text-sm font-medium mb-1 flex items-center justify-center" contenteditable="true">
+          <i data-lucide="gauge" class="lucide mr-2"></i>Speed
+        </div>
+        <div class="text-green-600 text-lg font-bold">
+          <span class="line-through text-gray-400" contenteditable="true">
+            Up to 20Mbps
+          </span>
+          <span contenteditable="true">Full Speed</span>
+        </div>
+      </div>
+      <!-- Flexi Minutes -->
+      <div class="bg-blue-50 p-4 rounded-xl text-center shadow-sm border-2 border-yellow-500">
+        <div class="text-gray-500 text-sm font-medium mb-1 flex items-center justify-center" contenteditable="true">
+          <i data-lucide="phone-call" class="lucide"></i> Flexi Minutes
+        </div>
+        <div class="text-green-600 text-lg font-bold" contenteditable="true">
+          1500
+        </div>
+      </div>
+      <!-- Roaming Data -->
+      <div class="bg-blue-50 p-4 rounded-xl text-center shadow-sm border-2 border-red-300">
+        <div class="text-gray-500 text-sm font-medium mb-1 flex items-center justify-center whitespace-nowrap" contenteditable="true">
+          <i data-lucide="globe" class="lucide mr-1"></i>Roaming Data
+        </div>
+        <div class="text-green-600 text-lg font-bold" contenteditable="true">
+          10GB
+        </div>
+      </div>
+    </div>
+    <!-- Promotion -->
+    <div class="bg-red-500 text-white p-4 rounded-lg mb-6 shadow-md border-2 border-yellow-500">
+      <div class="text-lg font-bold mb-2 flex items-center" contenteditable="true">
+        <i data-lucide="star" class="lucide"></i> Exclusive Promotion
+      </div>
+      <div
+        class="bg-red-600 p-2 rounded-lg mb-2 flex items-center shadow-inner border-2 border-red-300"
+        contenteditable="true"
+      >
+        <i class="fas fa-gift mr-2"></i> 25% off for 6 months**
+      </div>
+      <div
+        class="bg-red-600 p-2 rounded-lg mb-2 flex items-center shadow-inner border-2 border-red-300"
+        contenteditable="true"
+      >
+        <i class="fas fa-gift mr-2"></i> Choose your own gift*
+      </div>
+    </div>
+    <!-- Pricing -->
+    <div class="text-center">
+      <div class="text-gray-600 text-sm mb-1" contenteditable="true">
+        <i class="fas fa-calendar-alt"></i> 12-month commitment
+      </div>
+      <div class="text-gray-800 text-2xl font-bold" contenteditable="true">
+        AED 500
+        <span class="text-lg font-normal" contenteditable="true">/month</span>
+      </div>
+      <div class="text-gray-500 text-sm" contenteditable="true">
+        5% VAT excluded
+      </div>
+    </div>
+  </div>
+  <!-- Input Area for Multiple Numbers -->
+  <div class="w-full max-w-sm mb-8">
+    <textarea id="phoneNumbers" rows="5" class="w-full p-4 border rounded-lg" placeholder="Enter phone numbers, each on a new line"></textarea>
+    <button onclick="generatePosters()" class="mt-4 w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600">
+      Generate Posters
+    </button>
+  </div>
+  <!-- Posters Container -->
+  <div id="generatedPosters" class="flex flex-wrap gap-8 justify-center"></div>
+
+  <!-- Scripts -->
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- FontFaceObserver -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+  <script>
+    lucide.createIcons();
+
+    function updateCategoryStyles() {
+      const select = document.getElementById("categorySelect");
+      const selectedOption = select.options[select.selectedIndex];
+      const bgColor = selectedOption.getAttribute("data-bg-color");
+      const textColor = selectedOption.getAttribute("data-text-color");
+      const icon = selectedOption.getAttribute("data-icon");
+      const textClass = selectedOption.getAttribute("data-text-class");
+
+      // Update background and text color for the dropdown container
+      const categoryContainer = document.getElementById("categoryContainer");
+      categoryContainer.style.background = bgColor;
+      select.className = `category-dropdown ${textClass}`;
+
+      // Update the icon for the category
+      const categoryIcon = document.getElementById("categoryIcon");
+      categoryIcon.setAttribute("data-lucide", icon);
+      lucide.createIcons();
+
+      // Update background and text color for the phone number container
+      const numberHighlight = document.getElementById("numberHighlight");
+      numberHighlight.style.backgroundColor = bgColor;
+
+      if (selectedOption.value === "Gold") {
+        numberHighlight.style.color = "";
+        numberHighlight.classList.add("text-yellow-800");
+      } else {
+        numberHighlight.style.color = textColor;
+        numberHighlight.classList.remove("text-yellow-800");
+      }
+    }
+
+    function generatePosters() {
+      const phoneNumbers = document.getElementById("phoneNumbers").value.split('\n');
+      const generatedPostersContainer = document.getElementById("generatedPosters");
+
+      // Clear previous posters
+      generatedPostersContainer.innerHTML = '';
+
+      // Clone the original poster element
+      const originalPoster = document.getElementById("poster");
+
+      phoneNumbers.forEach(number => {
+        if (number.trim()) {
+          // Create a deep clone of the original poster
+          const newPoster = originalPoster.cloneNode(true);
+
+          // Update the phone number in the cloned poster
+          const numberHighlight = newPoster.querySelector("#numberHighlight");
+          numberHighlight.innerHTML = `<i data-lucide="phone" class="lucide mr-2"></i> ${number.trim()}`;
+
+          // Apply the current category styles to the new poster
+          const select = document.getElementById("categorySelect");
+          const selectedOption = select.options[select.selectedIndex];
+          const bgColor = selectedOption.getAttribute("data-bg-color");
+          const textColor = selectedOption.getAttribute("data-text-color");
+          const icon = selectedOption.getAttribute("data-icon");
+          const textClass = selectedOption.getAttribute("data-text-class");
+
+          // Update category container in new poster
+          const clonedCategoryContainer = newPoster.querySelector("#categoryContainer");
+          clonedCategoryContainer.style.background = bgColor;
+          const clonedSelect = clonedCategoryContainer.querySelector("select");
+          clonedSelect.className = `category-dropdown ${textClass}`;
+          clonedSelect.value = selectedOption.value; // Set the correct dropdown value
+          const clonedCategoryIcon = clonedCategoryContainer.querySelector("#categoryIcon");
+          clonedCategoryIcon.setAttribute("data-lucide", icon);
+
+          // Update phone number container style in the new poster
+          numberHighlight.style.backgroundColor = bgColor;
+          if (selectedOption.value === "Gold") {
+            numberHighlight.style.color = "";
+            numberHighlight.classList.add("text-yellow-800");
+          } else {
+            numberHighlight.style.color = textColor;
+            numberHighlight.classList.remove("text-yellow-800");
+          }
+
+          // Append the cloned poster to the container
+          generatedPostersContainer.appendChild(newPoster);
+        }
+      });
+
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
